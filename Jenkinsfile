@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build'){
             steps {
-                git credentialsId: '7fc6f676-451f-4e16-b52d-02049fa25487', url: 'https://github.com/GauravBarua/Inventory-Management-System-Spring-Boot.git'
+                 sh "mvn clean install -Dmaven.test.skip=true"
                 
             }
         }
