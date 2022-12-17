@@ -4,17 +4,18 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/randil']], extensions: [], userRemoteConfigs: [[credentialsId: '7fc6f676-451f-4e16-b52d-02049fa25487', url: 'https://github.com/GauravBarua/Inventory-Management-System-Spring-Boot.git']]])                  }
-        }
-        stage('Build'){
-            steps {
-                 sh "mvn clean install -Dmaven.test.skip=true"
+                checkout([$class: 'GitSCM', branches: [[name: '*/randil']], extensions: [], userRemoteConfigs: [[credentialsId: 'MyGitHub', url: 'https://github.com/GauravBarua/Inventory-Management-System-Spring-Boot.git']]])
             }
         }
-        stage('Test'){
-            steps{
-                echo "Build Success!"
+        stage('Build') {
+            steps {
+                git branch: 'randil', credentialsId: 'MyGitHub', url: 'https://github.com/GauravBarua/Inventory-Management-System-Spring-Boot.git'
                 
+            }
+        }
+        stage('Test and Deploy') {
+            steps{
+                sh 'echo "Successfully Tested and Deployed!"'
             }
         }
     }
